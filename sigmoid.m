@@ -8,9 +8,9 @@
 ## @end deftypefn
 function y = sigmoid(x, b=1, derivative=false)
 	if (derivative) 
-		y = x.*(1-x)*b;
+		y = b/2*(1.0 - x .^2);
 	else
-		y = 1.0 ./ (1.0 + exp(-x*b));
+		y = 2.0 ./ (1.0 + exp(-x*b))-1.0;
 	endif
 endfunction
 %!assert(sigmoid(0), 0.5)
