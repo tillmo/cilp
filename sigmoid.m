@@ -6,11 +6,11 @@
 ## @var{derivative} is set to true
 ##
 ## @end deftypefn
-function y = sigmoid(x, derivative=false)
+function y = sigmoid(x, b=1, derivative=false)
 	if (derivative) 
-		y = x.*(1-x);
+		y = x.*(1-x)*b;
 	else
-		y = 1.0 ./ (1.0 + exp(-x));
+		y = 1.0 ./ (1.0 + exp(-x*b));
 	endif
 endfunction
 %!assert(sigmoid(0), 0.5)

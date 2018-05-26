@@ -26,7 +26,7 @@ display_data(X(sel, :));
 printf("Hit any key to continue\n");
 pause;
 
-[theta1, theta2] = nn_train(X_train, y_train, 0.001, max_iterations = 1000);
+[theta1, theta2] = nn_train(X_train, y_train, 0.001, 1, max_iterations = 1000);
 
 pred_values = nn_predict(X_test, theta1, theta2);
 [probability, pred_number] = max(pred_values, [], 2);

@@ -19,7 +19,7 @@
 ## @seealso{nn_predict}
 ## @end deftypefn
 ##
-function [theta1, theta2] = nn_train(X, y, desired_error, max_iterations = 100000, epsilon = 0.12, hidden_nodes = 0)
+function [theta1, theta2] = nn_train(X, y, desired_error, b=1, max_iterations = 100000, epsilon = 0.12, hidden_nodes = 0)
 
 	m = size(X, 1);
 	input_nodes = size(X, 2);
@@ -47,8 +47,8 @@ function [theta1, theta2] = nn_train(X, y, desired_error, max_iterations = 10000
 
 	for k = 1:max_iterations
 		% Feed forward
-		a2 = [a2_ones sigmoid( a1 * theta1 )];
-		a3 = sigmoid( a2 * theta2 );
+		a2 = [a2_ones sigmoid( a1 * theta1, b)];
+		a3 = sigmoid( a2 * theta2, b);
 
 		a3_delta = y - a3;
 
@@ -66,7 +66,7 @@ function [theta1, theta2] = nn_train(X, y, desired_error, max_iterations = 10000
 	
 		% Backpropagation
 		a2_error = a3_delta * theta2';
-		a2_delta = a2_error .* sigmoid(a2, true);
+		a2_delta = a2_error .* sigmoid(a2, b, true);
 
 		theta2 += ((a2' * a3_delta) ./ m);
 		theta1 += ((a1' * a2_delta) ./ m)(:, 2:end);

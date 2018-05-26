@@ -8,7 +8,7 @@
 ##
 ## @end deftypefn
 ##
-function a3 = nn_predict(X, theta1, theta2)
-	a2 = sigmoid([ones(size(X, 1), 1) X] * theta1);
-	a3 = sigmoid([ones(size(X, 1), 1) a2] * theta2);
+function a3 = nn_predict(X, theta1, theta2,b=1)
+	a2 = sigmoid([ones(size(X, 1), 1) X] * theta1,b);
+	a3 = sigmoid([ones(size(X, 1), 1) a2] * theta2,b);
 endfunction
