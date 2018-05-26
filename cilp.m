@@ -4,7 +4,7 @@
 # B; B ∧C∧ ∼ D → A; E ∧ F → A
 # is represented as
 #p = [struct('b',[],'h',"B"),struct('b',["B+";"C+";"D-"],'h',"A"),struct('b',["E+";"F+"],'h',"A")],struct('h',"B",'b',["A";"C"])
-function [theta1, theta2, outin] = cilp(p,b = 1)
+function [theta1, theta2, outin, amin] = cilp(p,b = 1)
   # number of clauses in p
   q = size(p,2);
   # k(l) = number of literals in body of clause l
@@ -65,10 +65,10 @@ function [theta1, theta2, outin] = cilp(p,b = 1)
   theta2 = [-theta_out',theta2']';
   # connection of output neurons to input neurons
   outin = [];
-  for i = 1:size(hlits,2)
-    hlit = hlits(i);
-    for j = 1:size(blits,2)
-       blit = blits(j);
+  for i = 1:size(blits,2)
+    blit = blits(i);
+    for j = 1:size(hlits,2)
+       hlit = hlits(j);
        if (blit==hlit)
          outin(i,j) = 1;
        else  
