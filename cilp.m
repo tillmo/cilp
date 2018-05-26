@@ -3,7 +3,9 @@
 # A program 
 # B; B ∧C∧ ∼ D → A; E ∧ F → A
 # is represented as
-#p = [struct('b',[],'h',"B"),struct('b',["B+";"C+";"D-"],'h',"A"),struct('b',["E+";"F+"],'h',"A")],struct('h',"B",'b',["A";"C"])
+#p1 = [struct('b',[],'h',"B"),struct('b',["B+";"C+";"D-"],'h',"A"),struct('b',["E+";"F+"],'h',"A")]
+# another example:
+#p2 = [struct('b',[],'h',"A"),struct('b',["A+"],'h',"B"),struct('b',["B+";"A+"],'h',"C"),struct('b',["A+";"C+"],'h',"D")]
 function [theta1, theta2, outin, amin] = cilp(p,b = 1)
   # number of clauses in p
   q = size(p,2);
