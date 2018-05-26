@@ -1,3 +1,4 @@
+# iterate neural tp function until fixpoint is reached
 function x = iter_tp(p,b = 1)
   # translate logical program to neural network
   [theta1, theta2, outin, amin] = cilp(p,b)
