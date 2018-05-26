@@ -19,7 +19,7 @@
 ## @seealso{nn_predict}
 ## @end deftypefn
 ##
-function [theta1, theta2] = nn_train(X, y, desired_error, b=1, max_iterations = 100000, epsilon = 0.12, hidden_nodes = 0)
+function [theta1, theta2] = nn_train(X, y, desired_error, b=1, max_iterations = 100000, epsilon = 0.12, hidden_nodes = 0, theta1 = 0, theta2 = 0)
 
 	m = size(X, 1);
 	input_nodes = size(X, 2);
@@ -27,9 +27,16 @@ function [theta1, theta2] = nn_train(X, y, desired_error, b=1, max_iterations = 
 	if (hidden_nodes <= 0)
 		hidden_nodes = floor(input_nodes * 2 / 3 + output_nodes);
 	endif
-	theta1 = theta_init(input_nodes, hidden_nodes, epsilon)';
-	theta2 = theta_init(hidden_nodes, output_nodes, epsilon)';
-
+  if (theta1==0)
+	  theta1 = theta_init(input_nodes, hidden_nodes, epsilon)';
+  else # slightly perturb weights in order to prevent symmetry
+    theta1 = theta1 + theta_init(input_nodes, hidden_nodes, 0.0001)'; 
+  endif
+  if (theta2==0)  
+	  theta2 = theta_init(hidden_nodes, output_nodes, epsilon)';
+  else # slightly perturb weights in order to prevent symmetry
+    theta2 =  theta2 + theta_init(hidden_nodes, output_nodes, 0.0001)';  
+  endif
 	% Move constants outside of the loop
 	% The first activation layer is constant
 	a1 = [ones(size(X, 1), 1) X];
