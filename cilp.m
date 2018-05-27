@@ -6,7 +6,7 @@
 #p1 = [struct('b',[],'h',"B"),struct('b',["B+";"C+";"D-"],'h',"A"),struct('b',["E+";"F+"],'h',"A")]
 # another example:
 #p2 = [struct('b',[],'h',"A"),struct('b',["A+"],'h',"B"),struct('b',["B+";"A+"],'h',"C"),struct('b',["A+";"C+"],'h',"D")]
-function [theta1, theta2, outin, amin] = cilp(p,b = 1)
+function [theta1, theta2, outin, amin, blits, hlits] = cilp(p,b = 1)
   # number of clauses in p
   q = size(p,2);
   # k(l) = number of literals in body of clause l
