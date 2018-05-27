@@ -1,5 +1,5 @@
 # program: A, B<-A, C<-A,B, D<-A,C
-p = [struct('b',[],'h',"A"),struct('b',["A+"],'h',"B"),struct('b',["B+";"A+"],'h',"C"),struct('b',["A+";"C+"],'h',"D")]
+p = [struct('b',[],'h',"A"),struct('b',["+A"],'h',"B"),struct('b',["+B";"+A"],'h',"C"),struct('b',["+A";"+C"],'h',"D")]
 # choose beta
 b=1
 # translate logical program to neural network

@@ -3,9 +3,9 @@
 # A program 
 # B; B ∧C∧ ∼ D → A; E ∧ F → A
 # is represented as
-#p1 = [struct('b',[],'h',"B"),struct('b',["B+";"C+";"D-"],'h',"A"),struct('b',["E+";"F+"],'h',"A")]
+#p1 = [struct('b',[],'h',"B"),struct('b',["+B";"+C";"-D"],'h',"A"),struct('b',["+E";"+F"],'h',"A")]
 # another example:
-#p2 = [struct('b',[],'h',"A"),struct('b',["A+"],'h',"B"),struct('b',["B+";"A+"],'h',"C"),struct('b',["A+";"C+"],'h',"D")]
+#p2 = [struct('b',[],'h',"A"),struct('b',["+A"],'h',"B"),struct('b',["+B";"+A"],'h',"C"),struct('b',["+A";"+C"],'h',"D")]
 function [theta1, theta2, outin, amin, blits, hlits] = cilp(p,b = 1)
   # number of clauses in p
   q = size(p,2);
@@ -40,10 +40,10 @@ function [theta1, theta2, outin, amin, blits, hlits] = cilp(p,b = 1)
     for j = 1:size(blits,2)
        lit = blits(j);
        for kk = 1:size(l.b,1)
-         if (lit==l.b(kk,1))
-           if (l.b(kk,2)=="+")
+         if (lit==l.b(kk,2))
+           if (l.b(kk,1)=="+")
              theta1(i,j) = w;
-           elseif (l.b(kk,2)=="-")
+           elseif (l.b(kk,1)=="-")
              theta1(i,j) = -w;
            endif
          endif
