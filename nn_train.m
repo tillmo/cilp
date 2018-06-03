@@ -19,11 +19,15 @@
 ## @seealso{nn_predict}
 ## @end deftypefn
 ##
-function [theta1, theta2] = nn_train(X, y, desired_error, b=1, max_iterations = 100000, epsilon = 0.12, theta1 = 0, theta2 = 0, hidden_nodes = 0)
+function [theta1, theta2] = nn_train(X, y, desired_error, b=1, max_iterations = 100000, epsilon = 0.12, theta1 = 0, theta2 = 0, hidden_nodes = 0, restriction = 0)
 
 	m = size(X, 1);
 	input_nodes = size(X, 2);
 	output_nodes = size(y, 2);
+  if(restriction==0) # no restriction?
+    # then select everything
+    restriction = ones(size(y, 2), 1)'
+  endif
   if (theta1==0) # no weight matrix from input to hidden layer given?
   	if (hidden_nodes <= 0) # no number of hidden nodes given?
       # then compute a useful number of hidden nodes
@@ -62,7 +66,7 @@ function [theta1, theta2] = nn_train(X, y, desired_error, b=1, max_iterations = 
 		a2 = [a2_ones sigmoid( a1 * theta1, b)];
 		a3 = sigmoid( a2 * theta2, b);
 
-		a3_delta = y - a3;
+		a3_delta = (y - a3) * diag(restriction); # error, restricted to relevat output neurons
 
 		% Each second report the current state to the user
 		if (toc(tic_id) > 1)
