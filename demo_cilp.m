@@ -9,9 +9,7 @@ b=1
 x1 = iter_tp(theta1, theta2, outin, amin, b)
 # learning
 clause = ["+D";"+B";"+A"]
-in = lits_to_vector(inlits,clause)
-out = lits_to_vector(outlits,clause)
-[thetan1,thetan2] = nn_train(in,out,0.0001,b,100000,0.12,theta1, theta2)
+[thetan1,thetan2] = cilp_train(clause, theta1, theta2, inlits, outlits, b)
 # now use the trained network
 x2 = iter_tp(thetan1, thetan2, outin, amin, b)
 
