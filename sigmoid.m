@@ -13,9 +13,3 @@ function y = sigmoid(x, b=1, derivative=false)
 		y = 2.0 ./ (1.0 + exp(-x*b))-1.0;
 	endif
 endfunction
-%!assert(sigmoid(0), 0.5)
-%!assert(sigmoid([0]), [0.5])
-%!assert(sigmoid(1), 0.73105, 0.00001)
-%!assert(sigmoid([0, 1]), [0.5, 0.73105], 0.00001)
-%!assert(sigmoid([0 1; 0 1]), [0.5, 0.73105; 0.5, 0.73105], 0.00001)
-%!assert(sigmoid(0.2, true), 0.16, 0.00001)
