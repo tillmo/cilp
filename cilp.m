@@ -3,7 +3,7 @@
 # A program 
 # B; B ∧C∧ ∼ D → A; E ∧ F → A
 # is represented as
-#p1 = [struct('b',[],'h',"B"),struct('b',["+B";"+C";"-D"],'h',"A"),struct('b',["+E";"+F"],'h',"A")]
+#p1 = [struct('b',[],'h',"B"),struct('b',["+B";"+C";"~D"],'h',"A"),struct('b',["+E";"+F"],'h',"A")]
 # another example:
 #p2 = [struct('b',[],'h',"A"),struct('b',["+A"],'h',"B"),struct('b',["+B";"+A"],'h',"C"),struct('b',["+A";"+C"],'h',"D")]
 function [theta1, theta2, outin, amin, blits, hlits] = cilp(p,b = 1)
@@ -16,7 +16,7 @@ function [theta1, theta2, outin, amin, blits, hlits] = cilp(p,b = 1)
   # all head literals
   hlits = unique(h)
   # all body literals
-  blits = "+-";
+  blits = "+~";
   for l = p
     blits = [blits,reshape(l.b,1,2*size(l.b))];
   endfor  
@@ -43,7 +43,7 @@ function [theta1, theta2, outin, amin, blits, hlits] = cilp(p,b = 1)
          if (lit==l.b(kk,2))
            if (l.b(kk,1)=="+")
              theta1(i,j) = w;
-           elseif (l.b(kk,1)=="-")
+           elseif (l.b(kk,1)=="~")
              theta1(i,j) = -w;
            endif
          endif
