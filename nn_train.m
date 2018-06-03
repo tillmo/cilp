@@ -61,12 +61,13 @@ function [theta1, theta2] = nn_train(X, y, desired_error, b=1, max_iterations = 
 	% Set up internal timer before going into the loop
 	tic_id = tic();
 
+  dr = diag(restriction);
 	for k = 1:max_iterations
 		% Feed forward
 		a2 = [a2_ones sigmoid( a1 * theta1, b)];
 		a3 = sigmoid( a2 * theta2, b);
-
-		a3_delta = (y - a3) * diag(restriction); # error, restricted to relevat output neurons
+    
+		a3_delta = (y - a3) * dr; # error, restricted to relevat output neurons
 
 		% Each second report the current state to the user
 		if (toc(tic_id) > 1)

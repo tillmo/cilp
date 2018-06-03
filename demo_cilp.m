@@ -9,8 +9,9 @@ b=1
 # compute least fixpoint of tp
 x1 = iter_tp(theta1, theta2, outin, amin, b)
 # learning
-clause =struct('b',["+B";"+A"],'h',"C")
-[thetan1,thetan2] = cilp_train(clause, theta1, theta2, inlits, outlits, b)
+clause1 =struct('b',["+B";"+A"],'h',"C");
+clause2 =struct('b',["+B";"+A"],'h',"D");
+[thetan1,thetan2] = cilp_train([clause1], theta1, theta2, inlits, outlits, b)
 # now use the trained network
 x2 = iter_tp(thetan1, thetan2, outin, amin, b)
 
