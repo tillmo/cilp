@@ -20,7 +20,7 @@ function [theta1, theta2, outin, amin, blits, hlits] = cilp(p,b = 1)
   for l = p
     blits = [blits,reshape(l.b,1,2*size(l.b))];
   endfor  
-  blits = unique(blits)(3:end)
+  blits = unique(blits)(2:end-1)
   # for each head literal, number of clauses with that head literal
   mu = arrayfun(@(l) length(strfind(h,l)),hlits);
   # maximum of all k(l) and mu(l)
